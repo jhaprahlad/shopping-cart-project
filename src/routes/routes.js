@@ -1,6 +1,6 @@
 const router = require("express").Router();
-const {createUser, userLogin,getUserById, updateUser}= require("../controllers/userCtrl")
-const {createProduct,getProducts,getProductByParamsId}= require("../controllers/productCtrl")
+const {createUser, userLogin, getUserById, updateUser}= require("../controllers/userCtrl")
+const {createProduct, getProducts, getProductByParamsId, updateProduct}= require("../controllers/productCtrl")
 const { authentication } = require('../middlewares/auth');
 
 router.get("/test", (req, res) => {
@@ -16,6 +16,7 @@ router.put('/user/:userId/profile', authentication, updateUser) ;
 router.post('/products', createProduct)
 router.get('/products', getProducts);
 router.get('/products/:productId', getProductByParamsId);
+router.put('/products/:productId', updateProduct);
 
 
 
