@@ -4,25 +4,34 @@ const productSchema = new mongoose.Schema(
   {
     title: {
       type: String,
-      required: true,
+      required: [true, "title is required"],
       unique: true,
     },
     description: {
       type: String,
-      required: true,
+      required: [true, "description is required"],
+      minimum: 0
     },
     price: {
       type: Number,
-      required: true,
+      required: [true, "price is required"],
     },
     currencyId: {
       type: String,
-      required: true,
+      enum: {
+        values: ["INR"],
+        message: "{VALUE} is not a valid CurrencyId, please enter valid currencyId"
+    },
+      required: [true, "currencyId is required"],
     },
     currencyFormat: {
       type: String,
-      required: true,
-      Symbol: "₹",
+      enum: {
+        values: ["₹"],
+        message: "{VALUE} is not a valid Currency format, please enter valid currencyFormat"
+    },
+      required: [true, "currencyFormat is required"],
+      // Symbol: "₹",
     },
     isFreeShipping: {
       type: Boolean,
@@ -30,7 +39,7 @@ const productSchema = new mongoose.Schema(
     },
     productImage: {
       type: String,
-      required: true,
+      required: [true, "productImage is required"],
     },
     style: {
       type: String,
@@ -39,6 +48,20 @@ const productSchema = new mongoose.Schema(
       type: Array(String),
       required: true,
       enum: ["S", "XS", "M", "X", "L", "XXL", "XL"],
+      uniqueItems: true
+
+      // type:[{ 
+      //   type: String, 
+      // // minItems: 1,
+      //   enum: {
+      //     values: ["S", "XS", "M", "X", "L", "XXL", "XL"],
+      //   },
+      // }],
+      // uniqueItems: true,
+      // errorMessage: {
+      //   minItems: "Please select at least one size",
+      //   enum: "Please select a valid size from the available options: S, XS, M, X, L, XXL, XL",
+      // },
     },
     installments: {
       type: Number,
