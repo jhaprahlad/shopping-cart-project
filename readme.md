@@ -32,6 +32,6 @@ If you have any questions or need further assistance, please don't hesitate to r
 
 ---
 Contact for:
-https://github.com/ketan835985/
+https://github.com/jhaprahlad
 
 Feel free to adjust the content according to your project's specific requirements and add any additional details that would make your project documentation more engaging and informative.
