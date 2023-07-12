@@ -5,7 +5,7 @@ const {
   AWS_REGION,
 } = require("../../config");
 
-const fs = require("fs");
+// const fs = require("fs");
 
 const uploadFiles = async (file) => {
   AWS.config.update({

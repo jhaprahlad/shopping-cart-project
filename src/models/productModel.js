@@ -62,6 +62,7 @@ const productSchema = new mongoose.Schema(
       //   minItems: "Please select at least one size",
       //   enum: "Please select a valid size from the available options: S, XS, M, X, L, XXL, XL",
       // },
+      
     },
     installments: {
       type: Number,
