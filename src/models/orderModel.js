@@ -5,36 +5,36 @@ const orderSchema = new mongoose.Schema(
   {
     userId: {
       type: ObjectId,
-      required: true,
+      required: [true, "userId is required"],
       ref: "User",
     },
     items: [
       {
         productId: {
           type: ObjectId,
-          required: true,
+          required: [true, "productId is required"],
           ref: "Product",
         },
         quantity: {
           type: Number,
-          required: true,
-          min: 1,
+          required: [true, "quantity is required"],
+          min: [1, "minimum value of quantity should be 1"],
         },
       },
     ],
     totalPrice: {
       type: Number,
-      required: true,
+      required: [true, "totalPrice is required"],
       comment: "Holds total price of all the items in the cart",
     },
     totalItems: {
       type: Number,
-      required: true,
+      required: [true, "totalItems is required"],
       comment: "Holds total number of items in the cart",
     },
     totalQuantity: {
       type: Number,
-      required: true,
+      required: [true, "totalQuantity is required"],
       comment: "Holds total number of quantity in the cart",
     },
     cancellable: {
@@ -44,7 +44,10 @@ const orderSchema = new mongoose.Schema(
     status: {
       type: String,
       default: "pending",
-      enum: ["pending", "completed", "cancelled"],
+      enum: {
+        values: ["pending", "completed", "cancled"],
+        message: "{VALUE} is not a valid status",
+      },
     },
     deletedAt: {
       type: Date,
