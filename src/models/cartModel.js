@@ -5,31 +5,37 @@ const cartSchema = new mongoose.Schema(
   {
     userId: {
       type: ObjectId,
-      required: true,
+      required: [true, "userId is required"],
       ref: "User",
+      unique: true,
     },
+
+
     items: [
       {
         productId: {
           type: ObjectId,
-          required: true,
+          required: [true, "productId is required"],
           ref: "Product",
         },
+
         quantity: {
           type: Number,
-          required: true,
-          min: 1,
+          required: [true, "quantity is required"],
+          min: [1, "minimum value of quantity should be 1"],
         },
       },
     ],
+
+
     totalPrice: {
       type: Number,
-      required: true,
+      required: [true, "totalPrice is required"],
       comment: "Holds total price of all the items in the cart",
     },
     totalItems: {
       type: Number,
-      required: true,
+      required: [true, "totalItems is required"],
       comment: "Holds total number of items in the cart",
     },
   },

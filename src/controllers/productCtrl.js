@@ -287,9 +287,28 @@ const updateProduct = async (req, res) => {
   }
 };
 
+const deletedProduct = async (req, res) => {
+    try {
+        const productId = req.params.productId;
+        if (!ObjectIdCheck(productId)) {
+            return res.status(400).json({ status: false, message: 'Please Enter valid productId' });
+        }
+        const product = await productModel.findOne({ _id: productId, isDeleted: false });
+        if (!product) {
+            return res.status(404).json({ status: false, message: 'Product not found' });
+        }
+        await productModel.findByIdAndUpdate(productId , { $set: { isDeleted: true } });
+        return res.status(200).json({ status: true, message: 'Product deleted' });
+    } catch (error) {
+        res.status(500).json({ status: false, message: error.message });
+    }
+}
+
+
 module.exports = {
   createProduct,
   getProducts,
   getProductByParamsId,
   updateProduct,
+    deletedProduct,
 };
